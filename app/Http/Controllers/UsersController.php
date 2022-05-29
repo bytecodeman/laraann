@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
-use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserCreateRequest;
+use App\Http\Requests\UserEditRequest;
 use App\Models\User;
 use Exception;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class UsersController extends Controller
@@ -30,6 +30,11 @@ class UsersController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function register()
+    {
+        return view('users.register');
+    }
+
     public function create()
     {
         return view('users.create');
@@ -41,7 +46,7 @@ class UsersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function registerStore(UserCreateRequest $request)
     {
         $formFields = $request->validated();
 
@@ -51,6 +56,21 @@ class UsersController extends Controller
 
         auth()->login($user);
         return Redirect('/')->with('message', 'User created and logged in');
+    }
+
+    public function adminStore(UserCreateRequest $request)
+    {
+        $formFields = $request->validated();
+
+        $formFields['password'] = bcrypt($formFields['password']);
+        if ($request->has("isAdmin")) {
+            $formFields["isAdmin"] = 1;
+        } else {
+            $formFields["isAdmin"] = null;
+        }
+        $user = User::create($formFields);
+
+        return Redirect(route('users-manage'))->with('message', 'User created');
     }
 
     public function showLoginForm()
@@ -104,7 +124,8 @@ class UsersController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        $this->authorize("update", $user);
+        return view('users.edit', ['user' => $user]);
     }
 
     /**
@@ -114,9 +135,20 @@ class UsersController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UserEditRequest $request, User $user)
     {
-        //
+        $this->authorize($user);
+
+        $formFields = $request->validated();
+        $formFields['password'] = bcrypt($formFields['password']);
+        if ($request->has("isAdmin")) {
+            $formFields["isAdmin"] = 1;
+        } else {
+            $formFields["isAdmin"] = null;
+        }
+        $user->update($formFields);
+
+        return redirect(route('users-manage'))->with("message", "User Successfully Updated");
     }
 
     /**
@@ -134,6 +166,6 @@ class UsersController extends Controller
             }
         }
         $user->delete();
-        return back()->with("message", "User Deleted Successfully");
+        return Redirect(route('users-manage'))->with("message", "User Deleted Successfully");
     }
 }

@@ -21,6 +21,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'isAdmin'
     ];
 
     /**
@@ -45,5 +46,10 @@ class User extends Authenticatable
     public function announcements()
     {
         return $this->hasMany(Announcement::class);
+    }
+
+    public function isAdmin()
+    {
+        return $this->isAdmin;
     }
 }

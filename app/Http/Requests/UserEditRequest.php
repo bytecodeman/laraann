@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class UserEditRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -26,7 +26,7 @@ class UserRequest extends FormRequest
     {
         return [
             "name" => ['required', 'min:3'],
-            "email" => ['required', 'email', Rule::unique('users', 'email')],
+            "email" => ['required', 'email', Rule::unique('users', 'email')->ignore($this->user->id)],
             "password" => ['required', 'confirmed', 'min:6'],
         ];
     }

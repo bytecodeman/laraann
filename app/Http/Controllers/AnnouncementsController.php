@@ -58,17 +58,14 @@ class AnnouncementsController extends Controller
 
     public function edit(Announcement $announcement)
     {
-        if (!auth()->user()->isAdmin && $announcement->user_id != auth()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        $this->authorize("update", $announcement);
+
         return view('announcements.edit', ['announcement' => $announcement]);
     }
 
     public function update(AnnouncementRequest $request, Announcement $announcement)
     {
-        if (!auth()->user()->isAdmin && $announcement->user_id != auth()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        $this->authorize($announcement);
 
         $formFields = $request->validated();
         $formFields["tags"] = $request->input("tags");
@@ -89,17 +86,14 @@ class AnnouncementsController extends Controller
 
     public function confirmDelete(Announcement $announcement)
     {
-        if (!auth()->user()->isAdmin && $announcement->user_id != auth()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        $this->authorize("delete", $announcement);
         return view("announcements.delete", ['announcement' => $announcement]);
     }
 
     public function destroy(Announcement $announcement)
     {
-        if (!auth()->user()->isAdmin && $announcement->user_id != auth()->id()) {
-            abort(403, 'Unauthorized Action');
-        }
+        $this->authorize($announcement);
+
         if ($announcement->logo) {
             Storage::disk('public')->delete($announcement->logo);
         }

@@ -14,10 +14,12 @@
             <div>Posted by: {{ $announcement->user->name }}</div>
             <x-listing-tags :tagsCsv="$announcement->tags" />
             <div class="mb-5">
-                @if (auth()->user()->isAdmin || Auth()->id() == $announcement->user_id)
+                @if (auth()->user() && auth()->user()->can('update', $announcement))
                     <a href="/announcements/{{ $announcement->id}}/edit" class="bg-black text-white  px-3 py-1 rounded-lg hover:opacity-60">
                         <i class="fa-solid fa-pencil"></i> Edit
                     </a>
+                @endif
+                @if (auth()->user() && auth()->user()->can('delete', $announcement))
                     <a href="/announcements/{{ $announcement->id}}/delete" class="text-red-500 px-3 py-1">
                         <i class="fa-solid fa-trash"></i> Delete
                     </a>

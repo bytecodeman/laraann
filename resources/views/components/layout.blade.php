@@ -73,14 +73,13 @@
             {{ $slot }}
         </main>
         <footer
-            class="sticky bottom-0 left-0 w-full flex flex-col gap-y-10 items-center p-10 justify-start font-bold bg-laravel text-white mt-12 opacity-80 md:justify-end md:flex-row md:gap-x-24"
+            class="sticky bottom-0 left-0 w-full flex flex-col gap-y-10 items-center p-10 justify-start font-bold bg-laravel text-white mt-12 opacity-80 md:justify-end md:flex-row md:gap-x-12"
         >
-            <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
-
-            <a
-                href="/announcements/create"
-                class="top-1/3 right-10 bg-black text-white py-2 px-5"
-                >Post Announcement</a
+            <p>Copyright &copy; 2022, All Rights reserved</p>
+            <a href="{{ env('APP_GITHUB') }}" target="_blank" 
+                class="bg-black text-white py-2 px-5 rounded-lg">Source Code</a>
+            <a href="{{ route('announcements-create') }}"
+                class="bg-black text-white py-2 px-5 rounded-lg">Post Announcement</a
             >
         </footer>
         <x-flash-message message="message"></x-flash-message>

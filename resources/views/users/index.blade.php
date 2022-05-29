@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="bg-gray-50 border border-gray-200 p-10 rounded  w-[60%] mx-auto">
+    <div class="bg-gray-50 border border-gray-200 p-10 rounded  w-[70%] mx-auto">
     <header class="relative flex-col gap-4 md:flex-row md:justify-between">
         <h1 class="text-3xl text-center font-bold my-6 uppercase">
             Users

@@ -59,15 +59,16 @@ Route::put('/announcements/{announcement}/update', [AnnouncementsController::cla
 Route::delete('/announcements/{announcement}', [AnnouncementsController::class, "destroy"])->middleware("auth");
 
 Route::get('/users/register', [UsersController::class, "register"])->name('user-register')->middleware("guest");
-Route::get('/users/create', [UsersController::class, "create"])->name('user-create')->middleware("auth");
+Route::post('/users/register/create', [UsersController::class, "registerStore"])->name('user-register-store')->middleware('guest');
 
-Route::get('/login', [UsersController::class, "showLoginForm"])->name("user-login-form")->middleware("guest");
-Route::post('/users', [UsersController::class, "registerStore"])->name('user-register-store')->middleware('guest');
-Route::post('/users', [UsersController::class, "adminStore"])->name('user-admin-store')->middleware('auth');
+Route::get('/login', [UsersController::class, "showLoginForm"])->name("login")->middleware("guest");
 Route::post('/login', [UsersController::class, "login"])->name('user-login')->middleware('guest');
 Route::post('/logout', [UsersController::class, "logout"])->name("user-logout")->middleware('auth');
 
 Route::get('/users', [UsersController::class, "index"])->name("users-manage")->middleware('auth');
+Route::get('/users/create', [UsersController::class, "create"])->name('user-create')->middleware("auth");
+Route::post('/users/admin/create', [UsersController::class, "adminStore"])->name('user-admin-store')->middleware('auth');
+
 Route::delete('/users/{user}', [UsersController::class, "destroy"])->name("user-delete")->middleware("auth");
 Route::get('/users/{user}/edit', [UsersController::class, "edit"])->name("user-edit")->middleware("auth");
 Route::put('/users/{user}/update', [UsersController::class, "update"])->name("user-update")->middleware("auth");

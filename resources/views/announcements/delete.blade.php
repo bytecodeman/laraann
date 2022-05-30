@@ -9,7 +9,7 @@
                 <div class="flex space-x-5 my-5 justify-center items-center">
                     <span class="text-2xl font-bold">Are you sure you want to delete this announcement?</span>
                     <a href="{{ route('backToProperListing') }}" class="py-2 px-6 text-white rounded-lg bg-laravel hover:opacity-60">No</a>
-                    <form class="in-line p-4 rounded-lg hover:opacity-60" method="POST" action="/announcements/{{ $announcement->id }}">
+                    <form class="in-line p-4 rounded-lg hover:opacity-60" method="POST" action="{{ route('announcement-delete', ['announcement' => $announcement->id]) }}">
                         @csrf
                         @method("DELETE")
                         <button class="text-red-500"><i class="fa-solid fa-trash"></i> Yes - Delete</button>

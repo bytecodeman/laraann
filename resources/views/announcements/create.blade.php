@@ -9,7 +9,7 @@
             <p class="mb-4">Post a Announcement</p>
         </header>
 
-        <form method="POST" action="/announcements" enctype="multipart/form-data">
+        <form method="POST" action="{{ route('announcements-store') }}" enctype="multipart/form-data">
             @CSRF
             <div class="mb-6">
                 <label for="title" class="inline-block text-lg mb-2"

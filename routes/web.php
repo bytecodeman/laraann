@@ -46,16 +46,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AnnouncementsController::class, "index"])->name("home");
 
 Route::get('/announcements/create', [AnnouncementsController::class, "create"])->name('announcements-create')->middleware("auth");
-Route::post('/announcements', [AnnouncementsController::class, "store"])->middleware("auth");
+Route::post('/announcements', [AnnouncementsController::class, "store"])->name('announcements-store')->middleware("auth");
 
 Route::get('/announcements/manage', [AnnouncementsController::class, "manage"])->name('announcements-manage')->middleware('auth');
 Route::get('/announcements/manage/listings/{message?}', [AnnouncementsController::class, "backToProperListing"])->name('backToProperListing');
-Route::get('/announcements/manage/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->middleware("auth");
+Route::get('/announcements/manage/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->name('announcement-delete')->middleware("auth");
 
 Route::get('/announcements/{announcement}', [AnnouncementsController::class, "show"])->name('announcement-show');
-Route::get('/announcements/{announcement}/edit', [AnnouncementsController::class, "edit"])->middleware("auth");
-Route::get('/announcements/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->middleware("auth");
-Route::put('/announcements/{announcement}/update', [AnnouncementsController::class, "update"])->middleware("auth");
+Route::get('/announcements/{announcement}/edit', [AnnouncementsController::class, "edit"])->name('announcement-edit')->middleware("auth");
+Route::get('/announcements/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->name('announcement-delete')->middleware("auth");
+Route::put('/announcements/{announcement}/update', [AnnouncementsController::class, "update"])->name('announcement-update')->middleware("auth");
 Route::delete('/announcements/{announcement}', [AnnouncementsController::class, "destroy"])->middleware("auth");
 
 Route::get('/users/register', [UsersController::class, "register"])->name('user-register')->middleware("guest");

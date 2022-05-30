@@ -69,7 +69,7 @@ class AnnouncementPolicy
      */
     public function update(User $user, Announcement $announcement)
     {
-        return $user->id === $announcement->user_id;
+        return $user->id == $announcement->user_id;
     }
 
     /**
@@ -81,7 +81,7 @@ class AnnouncementPolicy
      */
     public function delete(User $user, Announcement $announcement)
     {
-        return $user->id === $announcement->user_id;
+        return $user->id == $announcement->user_id;
     }
 
     /**

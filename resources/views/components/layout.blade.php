@@ -34,7 +34,7 @@
     </head>
     <body>
         <nav class="flex justify-between items-center mb-1">
-            <a href="/" class="bg-laravel py-8 px-4 text-4xl font-bold uppercase text-white">Announcements</a>
+            <a href="{{ route('home') }}" class="bg-laravel py-8 px-4 text-4xl font-bold uppercase text-white">Announcements</a>
             <ul class="flex space-x-6 mr-6 text-lg">
                 @auth
                     <li><span class="font-bold uppercase">Welcome {{ (auth()->user()->isAdmin() ? "ADMIN " : "") . auth()->user()->name }}</span></li>

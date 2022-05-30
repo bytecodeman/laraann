@@ -7,10 +7,10 @@
         <i class="fa-solid fa-arrow-left"></i> Back
         </a>
         @if (Auth()->id() == $announcement->user_id)
-            <a href="/announcements/{{ $announcement->id}}/edit" class="bg-black text-white p-4 rounded-lg hover:opacity-60">
+            <a href="{{ route('announcement-edit', ['announcement'=> $announcement->id]) }}" class="bg-black text-white p-4 rounded-lg hover:opacity-60">
                 <i class="fa-solid fa-pencil"></i> Edit
             </a>
-            <a href="/announcements/{{ $announcement->id}}/delete" class="text-red-500 p-4">
+            <a href="{{ route('announcement-delete', ['announcement'=> $announcement->id]) }}" class="text-red-500 p-4">
                 <i class="fa-solid fa-pencil"></i> Delete
             </a>
         @endif

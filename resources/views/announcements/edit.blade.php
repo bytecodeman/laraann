@@ -7,7 +7,7 @@
             <p class="mb-4">Edit an Announcement</p>
         </header>
 
-        <form method="POST" action="/announcements/{{$announcement->id}}/update" enctype="multipart/form-data">
+        <form method="POST" action={{ route('announcement-update', ['announcement'=>$announcement->id]) }}" enctype="multipart/form-data">
             @CSRF
             @method("PUT")
             <div class="mb-6">

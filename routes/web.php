@@ -54,9 +54,9 @@ Route::get('/announcements/manage/{announcement}/delete', [AnnouncementsControll
 
 Route::get('/announcements/{announcement}', [AnnouncementsController::class, "show"])->name('announcement-show');
 Route::get('/announcements/{announcement}/edit', [AnnouncementsController::class, "edit"])->name('announcement-edit')->middleware("auth");
-Route::get('/announcements/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->name('announcement-delete')->middleware("auth");
+Route::get('/announcements/{announcement}/delete', [AnnouncementsController::class, "confirmDelete"])->name('announcement-delete-form')->middleware("auth");
 Route::put('/announcements/{announcement}/update', [AnnouncementsController::class, "update"])->name('announcement-update')->middleware("auth");
-Route::delete('/announcements/{announcement}', [AnnouncementsController::class, "destroy"])->middleware("auth");
+Route::delete('/announcements/{announcement}', [AnnouncementsController::class, "destroy"])->name('announcement-delete')->middleware("auth");
 
 Route::get('/users/register', [UsersController::class, "register"])->name('user-register')->middleware("guest");
 Route::post('/users/register/create', [UsersController::class, "registerStore"])->name('user-register-store')->middleware('guest');

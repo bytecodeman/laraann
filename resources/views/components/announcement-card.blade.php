@@ -20,7 +20,7 @@
                     </a>
                 @endif
                 @if (auth()->user() && auth()->user()->can('delete', $announcement))
-                    <a href="{{ route('announcement-delete', ['announcement' => $announcement->id]) }}" class="text-red-500 px-3 py-1">
+                    <a href="{{ route('announcement-delete-form', ['announcement' => $announcement->id]) }}" class="text-red-500 px-3 py-1">
                         <i class="fa-solid fa-trash"></i> Delete
                     </a>
                 @endif

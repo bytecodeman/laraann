@@ -33,7 +33,7 @@
         <title>LaraAnn | Announcements Manager</title>
     </head>
     <body>
-        <nav class="flex justify-between items-center mb-1">
+         <nav class="flex flex-col md:flex-row gap-y-10 items-center mb-1 md:flex-row md:justify-between md:gap-x-1">
             <a href="{{ route('home') }}" class="bg-laravel py-8 px-4 text-4xl font-bold uppercase text-white">Announcements</a>
             <ul class="flex space-x-6 mr-6 text-lg">
                 @auth

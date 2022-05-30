@@ -88,7 +88,7 @@
                     name="logo"
                     value="{{ old('logo', $announcement->logo) }}"
                 />
-                <p><img src="/Storage/{{ $announcement->logo }}" alt=""></p>
+                <p><img src="{{$announcement->logo ? asset('storage/' . $announcement->logo) : asset('/images/no-image.png')}}" alt=""></p>
                 @error("logo")
                     <p class="text-red-500 text-xs mt-1">{{ $message }}</p>
                 @enderror

@@ -18,18 +18,7 @@
             crossorigin="anonymous"
             referrerpolicy="no-referrer"
         />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            laravel: "#5dade2",
-                        },
-                    },
-                },
-            };
-        </script>
+        <link href="{{ asset('css/app.css') }}" rel="stylesheet">
         <title>LaraAnn | Announcements Manager</title>
     </head>
     <body>
